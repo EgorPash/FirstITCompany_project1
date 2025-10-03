@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Движение денежных средств</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Движение денежных средств</h1>
+    <a href="{% url 'transaction_create' %}" class="btn btn-primary">Добавить запись</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Дата</th>
+                <th>Статус</th>
+                <th>Тип</th>
+                <th>Категория</th>
+                <th>Подкатегория</th>
+                <th>Сумма</th>
+                <th>Комментарий</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.date }}</td>
+                <td>{{ transaction.status }}</td>
+                <td>{{ transaction.type }}</td>
+                <td>{{ transaction.category }}</td>
+                <td>{{ transaction.subcategory }}</td>
+                <td>{{ transaction.amount }}</td>
+                <td>{{ transaction.comment }}</td>
+                <td>
+                    <a href="{% url 'transaction_edit' transaction.pk %}" class="btn btn-warning">Редактировать</a>
+                    <a href="{% url 'transaction_delete' transaction.pk %}" class="btn btn-danger">Удалить</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
